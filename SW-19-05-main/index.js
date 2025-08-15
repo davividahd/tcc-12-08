@@ -8,7 +8,8 @@ const { editarCliente } = require('./src/DAO/cliente/editarCliente.js');
 //empresa
 const { inserirEmpresa } = require('./src/DAO/Empresa/addEmpresa.js');
 const {buscarEmpresa} = require('./src/DAO/Empresa/buscarEmpresa.js');
-const {deletarEmpresa} = require('./src/DAO/Empresa/deletEmpresa.js')
+const {deletarEmpresa} = require('./src/DAO/Empresa/deletEmpresa.js');
+const { editarEmpresa } = require('./src/DAO/Empresa/editarEmpresa.js');
 
 const { conexao, closeConexao, testarConexao } = require('./src/DAO/conexao');
 
@@ -19,7 +20,7 @@ app.get('/tcc/v1', (req, res) => {
     res.json({ msg: "Aplicação Funcionando tcc" });
 });
 
-app.get('/tcc/busca', async (req, res) => {
+app.get('/tcc/buscarClientes', async (req, res) => {
     let candidato = await buscarClientes();
     res.json(candidato);
 });
@@ -66,7 +67,7 @@ app.post('/tcc/add_usuario', async (req, res) => {
 
 
 
-//delitpopopopopopop
+//deletar 
 
 app.delete('/tcc/deletar_usuario', async (req, res) =>{
     let { codigo } = req.body
@@ -78,7 +79,7 @@ app.delete('/tcc/deletar_usuario', async (req, res) =>{
 
 //editar
 
-app.patch('/empresa_produtos_limpeza/v4/cliente', async (req, res) =>{
+app.patch('/tcc/editar_usuario', async (req, res) =>{
     let {codigo, campo, valor } = req.body
     let resultado = await editarCliente(codigo, campo, valor)
     res.status(200).json(resultado)
@@ -150,4 +151,10 @@ app.delete('/tcc/deletar_empresa', async (req, res) =>{
     res.json(result)
 });
 
-
+//editar empresa
+app.patch('/tcc/editar_Empresa', async (req, res) =>{
+    let {codigo, campo, valor } = req.body
+    let resultado = await editarEmpresa(codigo, campo, valor)
+    res.status(200).json(resultado)
+    
+})
