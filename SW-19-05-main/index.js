@@ -144,7 +144,7 @@ app.get('/tcc/buscar_Empresas', async (req, res) => {
     let Empresa = await buscarEmpresa();
     res.json(Empresa);
 });
-
+//editar empresa
 app.patch('/tcc/editar_Empresas', async (req, res) =>{
     let {codigo, campo, valor } = req.body
     let resultado = await editarEmpresa(codigo, campo, valor)
@@ -158,6 +158,7 @@ app.delete('/tcc/deletar_empresa', async (req, res) =>{
     let result = await deletarEmpresa(id)
     res.json(result)
 });
+
 
 
 
