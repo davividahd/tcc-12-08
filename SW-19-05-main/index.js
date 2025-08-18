@@ -8,7 +8,9 @@ const { editarCliente } = require('./src/DAO/cliente/editarCliente.js');
 //empresa
 const { inserirEmpresa } = require('./src/DAO/Empresa/addEmpresa.js');
 const {buscarEmpresa} = require('./src/DAO/Empresa/buscarEmpresa.js');
+const {editarEmpresa} = require ('./src/DAO/Empresa/editarEmpresa.js')
 const {deletarEmpresa} = require('./src/DAO/Empresa/deletEmpresa.js')
+
 
 const { conexao, closeConexao, testarConexao } = require('./src/DAO/conexao');
 
@@ -143,11 +145,21 @@ app.get('/tcc/buscar_Empresas', async (req, res) => {
     res.json(Empresa);
 });
 
+app.patch('/tcc/editar_Empresas', async (req, res) =>{
+    let {codigo, campo, valor } = req.body
+    let resultado = await editarEmpresa(codigo, campo, valor)
+    res.status(200).json(resultado)
+    
+})
+
 //deletar empresa
 app.delete('/tcc/deletar_empresa', async (req, res) =>{
     let {id} = req.params
     let result = await deletarEmpresa(id)
     res.json(result)
 });
+
+
+
 
 
